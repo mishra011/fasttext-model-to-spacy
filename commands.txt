@@ -1,0 +1,21 @@
+pip install plac
+pip install -U pip setuptools wheel
+pip install -U spacy
+
+mkdir spacy_model
+
+python load_FASTTEXT.py
+
+mkdir mymodel
+
+python -m spacy package ./model/ ./mymodel/
+
+cd mymodel/nl_model-0.0.0
+python setup.py sdist
+
+pip install dist/nl_model-0.0.0.tar.gz
+
+
+python -m spacy link nl_model mm
+
+python test.py
